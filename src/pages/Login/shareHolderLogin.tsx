@@ -43,8 +43,8 @@ const ShareHolderLogin = (props:any) => {
         <form onSubmit={formik.handleSubmit}>
           <div className='flex-row'>
             <div className="form_group">
-              <label>Shareholder's Registration No.</label>
-              <input type="text" className="form_control" placeholder="Shareholder's Registration No." name="i_holder"
+              <label>{t('register.inp1_head')}</label>
+              <input type="text" className="form_control" placeholder={t('register.inpt1_place_holder')} name="i_holder"
                 autoComplete="off" id="i_holder"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -55,8 +55,8 @@ const ShareHolderLogin = (props:any) => {
               ) : null}
             </div>
             <div className="form_group">
-              <label>ID Card Number, Passport Number</label>
-              <input type="text" className="form_control" autoComplete="off" placeholder="ID Card Number" name="I_ref" id="I_ref"
+              <label>{t('register.inp2_head')}</label>
+              <input type="text" className="form_control" autoComplete="off" placeholder={t('register.inpt2_place_holder')} name="I_ref" id="I_ref"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.I_ref}
@@ -76,7 +76,7 @@ const ShareHolderLogin = (props:any) => {
         <div className='bottomtext'>
           <p>{t('register.refer_note')}</p>
           <p>{t('register.assist_note2')}</p>
-          <p className='tc_blue'><a href="https://quidlab.com/img/Privacy_policy.pdf" target="_blank">Quidtab Information Security Management and Data Protection Policy</a></p>
+          <p className='tc_blue'><a href="https://quidlab.com/img/Privacy_policy.pdf" target="_blank">{t('register.privacy_text')}</a></p>
           <p>Fogus version 2.3.0 Served from Singapore</p>
         </div>
       </div>

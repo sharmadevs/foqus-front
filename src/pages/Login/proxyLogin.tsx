@@ -4,6 +4,7 @@ import { shareHolderLogInAction } from '../../redux/user/action';
 import * as Yup from 'yup';
 import { useNavigate  } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { BufferToBase64 } from '../../const/utils';
 
 const ProxyLogin = (props:any) => {
   const {dispatch, navigate,lang, t , companyInfo}=props;
@@ -27,12 +28,12 @@ const ProxyLogin = (props:any) => {
     <section className='section'>
       <div className='container'>
       <div className="logo">
-          <img src={"/assets/images/logo.png"} alt="" />
+          <img src={companyInfo?.logo?.data ? BufferToBase64(companyInfo?.logo?.data): ""} alt="" />
         </div>
         <div className='title'>
-          <h2>Document Registation System for E-Meeting</h2>
-          <h3>Quidlab Company Limitedl</h3>
-          <p>The Annual General Meeting of Shareholders Year 2021, which will be held on 23 April 2021 at 02.OO p.m.</p>
+          <h2>{t('register.main_heading')}</h2>
+          <h3>{lang === "thai" ? companyInfo?.Company_Name_Thai: companyInfo?.Company_Name_Eng}</h3>
+          <p>{lang === "thai" ? companyInfo?.AGM_ADD_THAI: companyInfo?.AGM_ADD_ENG}</p>
         </div>
         <div className='menual'>
           <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Thai.pdf" target="_blank">คู่มือภาษาไทย</a>
@@ -41,8 +42,8 @@ const ProxyLogin = (props:any) => {
         <form onSubmit={formik.handleSubmit}>
             <div className='flex-row'>
               <div className="form_group">
-                <label>Unit No.</label>
-                <input type="text" className="form_control" placeholder="Unit No." name="i_holder"
+                <label>{t('register.inp_unit_head')}</label>
+                <input type="text" className="form_control" placeholder={t('register.inp_unit_holder')} name="i_holder"
                   autoComplete="off" id="i_holder"
                   onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -52,8 +53,8 @@ const ProxyLogin = (props:any) => {
               ) : null}
               </div>
               <div className="form_group">
-                <label>Area according to the title deed (square meter/square wa) or Ownership ratio</label>
-                <input type="text" className="form_control" autoComplete="off" placeholder="Area" name="I_ref" id="I_ref"
+                <label>{t('register.inp_area_head')}</label>
+                <input type="text" className="form_control" autoComplete="off" placeholder={t('register.inp_area__holder')} name="I_ref" id="I_ref"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.I_ref}
@@ -68,8 +69,8 @@ const ProxyLogin = (props:any) => {
             </div>
           </form>
         <div className='bottomtext'>
-          <p style={{textAlign:"left", fontWeight: 600}}>Note: If you need assistance submitting document please contact Phone: 064-9</p>
-          <p className='tc_blue'><a href="https://quidlab.com/img/Privacy_policy.pdf" target="_blank">Quidtab Information Security Management and Data Protection Policy</a></p>
+          <p style={{textAlign:"left", fontWeight: 600}}>{t('register.assist_note2')}</p>
+          <p className='tc_blue'><a href="https://quidlab.com/img/Privacy_policy.pdf" target="_blank">{t('register.privacy_text')}</a></p>
         </div>
     </div>
   </section>

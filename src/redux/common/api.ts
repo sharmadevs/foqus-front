@@ -41,7 +41,6 @@ export default class Api {
             params = null;
         }
         const headers = await Api.headers();
-        console.log(headers);
         let options = Object.assign(
             {
                 method: method,
@@ -54,13 +53,7 @@ export default class Api {
 
         return axios(options)
             .then((res: any) => {
-                // if (resp.status === 200 || resp.status === 201 || resp.status === 204) {
                 return res.data;
-                // } else if (resp.status === 401) {
-                //     throw resp.data.message;
-                // } else {
-                //     throw resp;
-                // }
             })
             .catch((error: any) => {
                 if (error.response) {
@@ -73,26 +66,3 @@ export default class Api {
             });
     }
 }
-
-/* import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import { API_BASE_URL } from "./url";
-let Api:AxiosInstance = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Referer": "iaastha",
-    }
-  });
-Api.interceptors.response.use(
-    (response: AxiosResponse) => {
-        return response;
-    },
-    (error:AxiosError) => {
-        console.log(error?.response?.status)
-        // Do something with response error
-        return Promise.reject(error);
-    }
-);
-export default Api; */

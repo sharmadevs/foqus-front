@@ -47,6 +47,14 @@ const userSlice = createSlice({
     },
 });
 
-export const { loginResponse, logoutResponse, companyInfoResponse,documentTypeListResponse } = userSlice.actions;
+export const { 
+    loginResponse, 
+    logoutResponse, 
+    companyInfoResponse,
+    documentTypeListResponse,
+    documentUploadResponse,
+    uploadedFileListResponse,
+    updateUserResponse
+} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -4,9 +4,9 @@ export const Url = {
     register: "/user/register",
     user: "/user/list",
     shareHolderLogin: "/egm/login",
-    updateUser: "/egm",
+    updateUser: "/egm/",
     companyinfo: "/company",
     documentTypeList:"/document/list",
     documentUpload: "/document/upload",
-    uploadedFile:"/document/uploaded",
+    uploadedFileList:"/document/uploaded/",
 }
