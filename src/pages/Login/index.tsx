@@ -14,11 +14,6 @@ const Login = () => {
   const {lang,setLang} = useContext<any>(LangContext);
   const {t}=useTranslation<string>();
   const companyInfo = useSelector((state: any) => state.user.companyInfo);
-  
-  useEffect(() => {
-    dispatch(companyInfoAction({}))
-   return () => { }
- }, []);
 
  let now= new Date(new Date().toLocaleString('en-US', { timeZone: companyInfo?.time_zone })).getTime();
  let open=new Date(companyInfo?.docreg_allowed_time).getTime();
@@ -26,13 +21,14 @@ const Login = () => {
  let condtion:boolean= now >= open && now <= close;
   return (
     <>
-    {companyInfo && !condtion &&
+    {companyInfo && !condtion && companyInfo?.meeting_type &&
       <RegistrationClose dispatch={dispatch} navigate={navigate} lang={lang} t={t} companyInfo={companyInfo}/>
     }
     {companyInfo && condtion && companyInfo?.meeting_type === "Condo" ?
       <ShareHolderLogin dispatch={dispatch} navigate={navigate} lang={lang} t={t} companyInfo={companyInfo}/>
-      :
+      : companyInfo?.meeting_type === "Invester" ?
       <ProxyLogin dispatch={dispatch} navigate={navigate} lang={lang} t={t} companyInfo={companyInfo}/>
+      : null
     }
     </>
   )

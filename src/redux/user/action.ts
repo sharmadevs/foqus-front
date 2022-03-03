@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { ShareholderRequest } from './model';
+import { ShareholderRequest, UpdateUserRequest } from './model';
 
 export const shareHolderLogInAction = createAction("shareholder/login", (Request: ShareholderRequest, navigate: any) => ({
     payload: { Request, navigate },
@@ -16,9 +16,9 @@ export const documentTypeListAction = createAction("documentType/list", (Request
 export const documentUploadAction = createAction("document/Upload", (Request: any) => ({
     payload: {Request },
 }));
-export const uploadedFileListAction = createAction("uploadedFileList", (Request: any) => ({
-    payload: {Request },
+export const uploadedFileListAction = createAction("uploadedFileList", (id:any) => ({
+    payload: {id },
 }));
-export const updateUserAction = createAction("updateUser", (Request: any) => ({
-    payload: {Request },
+export const updateUserAction = createAction("updateUser", (Request: UpdateUserRequest,id:any) => ({
+    payload: {Request,id },
 }));

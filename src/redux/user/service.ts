@@ -1,7 +1,7 @@
 import Api from "../common/api";
 import { HttpResponse } from "../common/response-model";
 import { Url } from "../common/url";
-import {ShareholderRequest } from "./model";
+import {ShareholderRequest, UpdateUserRequest } from "./model";
 
 export class UserService {
     private static instance: UserService;
@@ -22,5 +22,14 @@ export class UserService {
     };
     public documentTypeList = async (data: any): Promise<HttpResponse<any>> => {
         return await Api.get(Url.documentTypeList);
+    };
+    public documentUpload = async (data: any): Promise<HttpResponse<any>> => {
+        return await Api.post(Url.documentUpload, data);
+    };
+    public uploadedFileList = async (iHolder:any): Promise<HttpResponse<any>> => {
+        return await Api.get(Url.uploadedFileList + iHolder);
+    };
+    public updateUserList = async (data: UpdateUserRequest, id:any): Promise<HttpResponse<any>> => {
+        return await Api.put(Url.updateUser + id, data);
     };
 }
