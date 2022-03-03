@@ -4,6 +4,7 @@ import ROUTE from './Route';
 import UploadDocument from '../pages/UploadDocument/UploadDocument';
 import Login from '../pages/Login';
 import { getUser, PrivateRoute } from './privateRoute';
+import RegistrationClose from '../pages/Login/RegistrationClose';
 
 const AppRoutes = () => {
   return (
@@ -11,6 +12,7 @@ const AppRoutes = () => {
       <Route path={ROUTE.HOME} element={<Navigate to={ROUTE.UPLOAD_DOCUMENT}/> }/>
         <Route path={ROUTE.UPLOAD_DOCUMENT} element={<PrivateRoute><UploadDocument/></PrivateRoute>} />
         <Route  path={ROUTE.LOGIN} element={!getUser()? <Login/>:<UploadDocument/>}/>
+        <Route  path="*" element={<RegistrationClose/>}/>
     </Routes>
   )
 }
