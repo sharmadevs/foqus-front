@@ -1,0 +1,15 @@
+{
+    "register" : {
+        "main_heading": "ระบบนำส่งเอกสาร สำหรับการประชุมผ่านสื่ออิเล็กทรอนิกส์ E-Meeting",
+        "inp1_head": "Shareholder's Registration No.",
+        "inpt1_place_holder": "Shareholder's Registration No.",
+        "inp2_head": "ID Card Number, Passport Number",
+        "inpt2_place_holder": "ID Card Number",
+        "refer_note": "Note: Please refer to invitation letter for meeting to get a list of document to be uploaded in case of coming in person or proxy",
+        "assist_note2": "Note: If you need assistance submitting document please contact Quidlab",
+        "note_close": "Note: If you need assistance submitting document please contact guidlab at Phone: 02-O13afua:",
+        "privacy_text": "Quidtab Information Security Management and Data Protection Policy",
+        "version_text": "Fogus version 2.3.0 Served from Singapore",
+        "close_text": ""
+    }
+}
