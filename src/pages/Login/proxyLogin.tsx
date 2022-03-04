@@ -36,8 +36,13 @@ const ProxyLogin = (props:any) => {
           <p>{lang === "thai" ? companyInfo?.AGM_ADD_THAI: companyInfo?.AGM_ADD_ENG}</p>
         </div>
         <div className='menual'>
-          <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Thai.pdf" target="_blank">คู่มือภาษาไทย</a>
-          <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Eng.pdf" target="_blank">English Manual</a>
+          {
+            lang === "thai" ? (
+              <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Thai.pdf" target="_blank">คู่มือภาษาไทย</a>
+            ):(
+              <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Eng.pdf" target="_blank">English Manual</a>
+            )
+          }
         </div>
         <form onSubmit={formik.handleSubmit}>
             <div className='flex-row'>
