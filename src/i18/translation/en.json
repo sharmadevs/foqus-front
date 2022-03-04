@@ -1,0 +1,32 @@
+{
+    "register" : {
+        "main_heading": "Document Registation System for E-Meeting",
+        "inp1_head": "Shareholder's Registration No.",
+        "inpt1_place_holder": "Shareholder's Registration No.",
+        "inp2_head": "ID Card Number, Passport Number",
+        "inpt2_place_holder": "ID Card Number",
+        "refer_note": "Note: Please refer to invitation letter for meeting to get a list of document to be uploaded in case of coming in person or proxy",
+        "assist_note2": "Note: If you need assistance submitting document please contact Phone: 064-970-2200 Email : kamaldua@quidlab.com",
+        "note_close": "Note: If you need assistance submitting document please contact Phone: 064-970-2200 Email : kamaldua@quidlab.com",
+        "privacy_text": "Quidtab Information Security Management and Data Protection Policy",
+        "version_text": "Fogus version 2.3.0 Served from Singapore",
+        "close_text": "Document registration is closed.",
+        "inp_unit_head": "Unit No.",
+        "inp_unit_holder": "Unit No.",
+        "inp_area_head": "Area according to the title deed (square meter/square wa) or Ownership ratio",
+        "inp_area__holder": "Area",
+        "inp_email_head": "Email address",
+        "inp_email_holder": "test@test.com",
+        "inp_phone_head": "Phone Number",
+        "inp_phone__holder": "5566778899",
+        "already_submit": "You have already submitted documents, you can add more documents if you wish.",
+        "doc_under_considertion": "Your documents are under considertion. Please check again later.",
+        "upload_file": "Upload files",
+        "attend_meeting": "Attend meeting",
+        "person": "Person",
+        "proxy": "Proxy",
+        "Proxy_Name": "Proxy Name",
+        "Proxy_Type": "Proxy Type",
+        "Proxy_ID_Card": "Proxy ID Card No"
+    }
+}
