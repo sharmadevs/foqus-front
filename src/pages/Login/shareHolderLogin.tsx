@@ -4,12 +4,16 @@ import * as Yup from 'yup';
 import {  shareHolderLogInAction } from '../../redux/user/action';
 import LangContext from '../../const/langContext';
 import { BufferToBase64 } from '../../const/utils';
+import Logo from '../../component/Logo/Logo';
 
 const loginSchema = Yup.object().shape({
   i_holder: Yup.string()
     .required('Registration No required'),
   I_ref: Yup.string()
-    .required('ID Card Number/Passport Number required')
+    .required('ID Card Number/Passport Number required'),
+  termsAccepted: Yup
+    .boolean()
+    .oneOf([true], 'Must Accept termsAccepted'),
 })
 
 const ShareHolderLogin = (props:any) => {
@@ -17,10 +21,13 @@ const ShareHolderLogin = (props:any) => {
   const formik = useFormik({
     initialValues: {
       i_holder: '',
-      I_ref: ''
+      I_ref: '',
+      termsAccepted: false,
     },
     validationSchema: loginSchema,
     onSubmit: values => {
+      let val:any={...values};
+      delete val?.termsAccepted;
       dispatch(shareHolderLogInAction(values, navigate))
     },
   });
@@ -28,9 +35,7 @@ const ShareHolderLogin = (props:any) => {
   return (
     <section className='section'>
       <div className='container'>
-        <div className="logo">
-          <img src={companyInfo?.logo?.data ? BufferToBase64(companyInfo?.logo?.data): ""} alt="" />
-        </div>
+        <Logo/>
         <div className='title'>
           <h2>{t('register.main_heading')}</h2>
           <h3>{lang === "thai" ? companyInfo?.Company_Name_Thai: companyInfo?.Company_Name_Eng}</h3>
@@ -72,10 +77,16 @@ const ShareHolderLogin = (props:any) => {
             </div>
           </div>
           <div className="sub_button">
-            <input type="checkbox" id="terms" name="terms" /><label htmlFor="terms">Accept terms</label>
+            <input type="checkbox" id="termsAccepted" name="termsAccepted" 
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            /><label htmlFor="termsAccepted">Accept terms</label>
+            {formik.errors.termsAccepted && formik.touched.termsAccepted ? (
+                <span className="error_message">{formik.errors.termsAccepted}</span>
+              ) : null}
           </div>
           <div className="sub_button">
-            <button type="submit" name="terms" >Submit</button>
+            <button type="submit" >Submit</button>
           </div>
         </form>
         <div className='bottomtext'>

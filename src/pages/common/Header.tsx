@@ -16,8 +16,8 @@ const Header = () => {
         <div className='lngdrp'>
             <div className="form_group">
                 <select className="form_control" onChange={(e:any)=>langChange(e)} value={lang||""}>
-                <option value="en">En</option>
                 <option value="thai">Thai</option>
+                <option value="en">En</option>
                 </select>
             </div>
         </div>

@@ -21,7 +21,7 @@ export class UserService {
         return await Api.get(Url.companyinfo);
     };
     public documentTypeList = async (data: any): Promise<HttpResponse<any>> => {
-        return await Api.get(Url.documentTypeList);
+        return await Api.get(`${Url.documentTypeList}?proxy_type=${data?.proxy_type}`);
     };
     public documentUpload = async (data: any): Promise<HttpResponse<any>> => {
         return await Api.post(Url.documentUpload, data);

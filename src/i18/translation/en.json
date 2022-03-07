@@ -27,6 +27,7 @@
         "proxy": "Proxy",
         "Proxy_Name": "Proxy Name",
         "Proxy_Type": "Proxy Type",
-        "Proxy_ID_Card": "Proxy ID Card No"
+        "Proxy_ID_Card": "Proxy ID Card No",
+        "menual": ""
     }
 }

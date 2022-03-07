@@ -14,7 +14,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: localStorage.getItem("focus:lang") || 'en',
+  lng: localStorage.getItem("focus:lang") || 'thai',
   interpolation: {
     escapeValue: false
   }
