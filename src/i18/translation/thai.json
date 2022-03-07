@@ -27,6 +27,7 @@
         "proxy": "รับมอบฉันทะ ",
         "Proxy_Name": "ชื่อผู้รับมอบฉันทะ",
         "Proxy_Type": "Proxy Type",
-        "Proxy_ID_Card": "เลขบัตรประชาชนพร็อกซี "
+        "Proxy_ID_Card": "เลขบัตรประชาชนพร็อกซี ",
+        "menual": ""
     }
 }

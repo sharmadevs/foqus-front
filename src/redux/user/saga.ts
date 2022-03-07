@@ -80,7 +80,7 @@ export function* documentUpload(data: any) {
         let res: HttpResponse<any> = yield call(UserService.getInstance().documentUpload, Request);
         let response: any = res;
         yield put(documentUploadResponse(response?.data));
-        yield put(toast({ message: "File Upload successfully", type: 'success' }));
+        /* yield put(toast({ message: "File Upload successfully", type: 'success' })); */
         yield put(loader(false));
     } catch (err: any) {
         yield put(loader(false));

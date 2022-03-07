@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import Logo from '../../component/Logo/Logo';
+import LangContext from '../../const/langContext';
 import { BufferToBase64 } from '../../const/utils';
 
 const RegistrationClose = (props: any) => {
   const { t } = useTranslation<string>();
   const companyInfo = useSelector((state: any) => state.user.companyInfo);
+  const { lang, setLang } = useContext<any>(LangContext);
   return (
     <section className='section'>
       <div className='container'>
-        <div className="logo">
-          <img src={companyInfo?.logo?.data ? BufferToBase64(companyInfo?.logo?.data) : ""} alt="" />
-        </div>
+        <Logo/>
         <div className='title'>
           <h2>{t('register.main_heading')}</h2>
         </div>
         <div className='menual'>
-          <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Thai.pdf" target="_blank">คู่มือภาษาไทย</a>
-          <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Eng.pdf" target="_blank">English Manual</a>
+        {lang == "en" &&<a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Eng.pdf" target="_blank">English Manual</a>}
+        {lang == "thai" &&<a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Thai.pdf" target="_blank">คู่มือภาษาไทย</a>}
         </div>
         <div>
           <h3 className='text_center'>{t('register.close_text')}</h3>

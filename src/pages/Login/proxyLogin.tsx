@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useNavigate  } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { BufferToBase64 } from '../../const/utils';
+import Logo from '../../component/Logo/Logo';
 
 const ProxyLogin = (props:any) => {
   const {dispatch, navigate,lang, t , companyInfo}=props;
@@ -17,7 +18,8 @@ const ProxyLogin = (props:any) => {
   const formik = useFormik({
     initialValues: {
       i_holder: '',
-      I_ref: ''
+      I_ref: '',
+      termsAccepted:true
     },
     validationSchema: loginSchema,
     onSubmit: values => {
@@ -27,9 +29,7 @@ const ProxyLogin = (props:any) => {
   return (
     <section className='section'>
       <div className='container'>
-      <div className="logo">
-          <img src={companyInfo?.logo?.data ? BufferToBase64(companyInfo?.logo?.data): ""} alt="" />
-        </div>
+       <Logo/>
         <div className='title'>
           <h2>{t('register.main_heading')}</h2>
           <h3>{lang === "thai" ? companyInfo?.Company_Name_Thai: companyInfo?.Company_Name_Eng}</h3>
