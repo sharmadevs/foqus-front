@@ -24,9 +24,9 @@ const Login = () => {
     {companyInfo && !condtion && companyInfo?.meeting_type &&
       <RegistrationClose dispatch={dispatch} navigate={navigate} lang={lang} t={t} companyInfo={companyInfo}/>
     }
-    {companyInfo && condtion && companyInfo?.meeting_type === "Condo" ?
+    {companyInfo && condtion && companyInfo?.meeting_type === "Invester" ?
       <ShareHolderLogin dispatch={dispatch} navigate={navigate} lang={lang} t={t} companyInfo={companyInfo}/>
-      : companyInfo?.meeting_type === "Invester" ?
+      : companyInfo?.meeting_type === "Condo" ?
       <ProxyLogin dispatch={dispatch} navigate={navigate} lang={lang} t={t} companyInfo={companyInfo}/>
       : null
     }
