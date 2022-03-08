@@ -49,7 +49,7 @@ const UploadDocument = () => {
       }),
     ProxyType: Yup.string()
       .when("Proxy", (Proxy) => {
-        if (Proxy === "Y" && companyInfo?.meeting_type === "Invester") {
+        if (Proxy === "Y" && companyInfo?.meeting_type === "Condo") {
           return Yup.string().required("Proxy Type required")
         } else {
           return Yup.string()
@@ -57,7 +57,7 @@ const UploadDocument = () => {
       }),
     proxy_I_ref: Yup.string()
       .when("Proxy", (Proxy) => {
-        if (Proxy === "Y" && companyInfo?.meeting_type === "Condo") {
+        if (Proxy === "Y" && companyInfo?.meeting_type === "Investor") {
           return Yup.string().required("Proxy Id required")
         } else {
           return Yup.string()
@@ -105,18 +105,15 @@ const UploadDocument = () => {
     getUploadedDoc();
     return () => { }
   }, [])
-  // useEffect(() => {
-  //   if (toast && toast?.type === 'success' && toast?.message === "File Upload successfully") {
-  //     getUploadedDoc();
-  //   } else if (toast?.message === "Update successfully") {
-  //     let USER: any = JSON.parse(localStorage.getItem("focus:user") || "");
-  //     let newUser = { ...USER, ...values };
-  //     console.log(newUser, values)
-  //     localStorage.setItem("focus:user", JSON.stringify(newUser));
-  //     /* window.location.reload(); */
-  //   }
-  //   return () => { }
-  // }, [toast])
+  useEffect(() => {
+    if (toast?.message === "Update successfully") {
+      getUploadedDoc();
+      let USER: any = JSON.parse(localStorage.getItem("focus:user") || "");
+      let newUser = { ...USER, ...values };
+      localStorage.setItem("focus:user", JSON.stringify(newUser));
+    }
+    return () => { }
+  }, [toast])
 
   useEffect(() => {
     let USER: any = JSON.parse(localStorage.getItem("focus:user") || "");
@@ -256,7 +253,7 @@ const UploadDocument = () => {
                     <span className="error_message">{formik.errors.Proxy_name}</span>
                   ) : null}
                 </div>
-                {companyInfo?.meeting_type === "Investor" &&
+                {companyInfo?.meeting_type === "Condo" &&
                   <div className="form_group">
                     <label>{t('register.Proxy_Type')}</label>
                     <select className="form_control"
@@ -273,7 +270,7 @@ const UploadDocument = () => {
                       <span className="error_message">{formik.errors.ProxyType}</span>
                     ) : null}
                   </div>}
-                {companyInfo?.meeting_type === "Condo" &&
+                {companyInfo?.meeting_type === "Investor" &&
                   <div className="form_group">
                     <label>{t('register.Proxy_ID_Card')}</label>
                     <input type="text" className="form_control" placeholder="Proxy ID Card No" name="proxy_I_ref"
