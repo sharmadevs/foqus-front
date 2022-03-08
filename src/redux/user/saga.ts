@@ -2,11 +2,9 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import ROUTE from "../../route/Route";
 import { loader, toast } from "../common/common-reducer";
 import { HttpResponse } from "../common/response-model";
-import {shareHolderLogInAction, logoutAction, companyInfoAction, documentTypeListAction, updateUserAction, uploadedFileListAction, documentUploadAction } from "./action";
-import { companyInfoResponse, documentTypeListResponse, documentUploadResponse, loginResponse, logoutResponse, updateUserResponse, uploadedFileListResponse } from "./reducer";
+import {shareHolderLogInAction, logoutAction, companyInfoAction, documentTypeListAction, updateUserAction, documentUploadAction, getEgmAction } from "./action";
+import { companyInfoResponse, documentTypeListResponse, documentUploadResponse, egmListResponse, loginResponse, logoutResponse, updateUserResponse } from "./reducer";
 import { UserService } from "./service";
-
-
 
 export function* shareHolderLogin(data: any) {
     try {
@@ -87,14 +85,14 @@ export function* documentUpload(data: any) {
         yield put(toast({ message: err.message, type: 'error' }));
     }
 }
-export function* uploadedFileList(data: any) {
+export function* getEgm(data: any) {
     try {
         yield put(loader(true));
         let payload = data.payload;
-        let {id} = payload;
-        let res: HttpResponse<any> = yield call(UserService.getInstance().uploadedFileList,id);
+        let {Request} = payload;
+        let res: HttpResponse<any> = yield call(UserService.getInstance().getEgm, Request);
         let response: any = res;
-        yield put(uploadedFileListResponse(response?.data));
+        yield put(egmListResponse(response?.data));
         yield put(loader(false));
     } catch (err: any) {
         yield put(loader(false));
@@ -123,7 +121,7 @@ export function* userEffects() {
     yield takeLatest(companyInfoAction.type, compnayInfo);
     yield takeLatest(documentTypeListAction.type, documentTypeList);
     yield takeLatest(documentUploadAction.type, documentUpload);
-    yield takeLatest(uploadedFileListAction.type, uploadedFileList);
+    yield takeLatest(getEgmAction.type, getEgm);
     yield takeLatest(updateUserAction.type, updateUserList);
 }
 

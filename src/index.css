@@ -70,6 +70,9 @@ body {
   padding-right: 5px;
   height: 70px;
 }
+.logo img {
+  object-fit: cover;
+}
 .sub_button {
   width: 100%;
   text-align: center;
@@ -202,7 +205,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: #671ccace;
+  background: #fff;
   color: #fff;
   margin: 0px;
   padding: 10px;
@@ -280,8 +283,9 @@ body {
 .action-btn {
   position: relative;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
   color: #c0c6d2;
   cursor: pointer;
   vertical-align: top;
@@ -292,4 +296,7 @@ body {
   background: #fe7676;
   border-radius: 50%;
   box-shadow: -1px 1px 6px rgb(254 118 118 / 80%);
+}
+.notStart {
+  font-size: 24px;
 }

@@ -26,8 +26,8 @@ export class UserService {
     public documentUpload = async (data: any): Promise<HttpResponse<any>> => {
         return await Api.post(Url.documentUpload, data);
     };
-    public uploadedFileList = async (iHolder:any): Promise<HttpResponse<any>> => {
-        return await Api.get(Url.uploadedFileList + iHolder);
+    public getEgm = async (Request:any): Promise<HttpResponse<any>> => {
+        return await Api.get(Url.getEgm, Request);
     };
     public updateUserList = async (data: UpdateUserRequest, id:any): Promise<HttpResponse<any>> => {
         return await Api.put(Url.updateUser + id, data);

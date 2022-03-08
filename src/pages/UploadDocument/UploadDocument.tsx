@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LangContext from '../../const/langContext';
 import { BufferToBase64 } from '../../const/utils';
-import { documentTypeListAction, documentUploadAction, logoutAction, updateUserAction, uploadedFileListAction } from '../../redux/user/action';
+import { documentTypeListAction, documentUploadAction, logoutAction, updateUserAction, getEgmAction } from '../../redux/user/action';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Logo from '../../component/Logo/Logo';
@@ -25,10 +25,10 @@ const UploadDocument = () => {
     proxy_I_ref: ''
   });
   const [filesShow, setFilesShow] = useState<any[]>([]);
-  const [files, setFiles] = useState<any[]>([]);
+  const [Egm, setEgm] = useState<any>();
   const [fileData, setFileData] = useState<any[]>([]);
   const documentType = useSelector((state: any) => state.user.documentType);
-  const document = useSelector((state: any) => state.user.documentList);
+  const egm = useSelector((state: any) => state.user.egm);
   const companyInfo = useSelector((state: any) => state.user.companyInfo);
   const toast = useSelector((state: any) => state.common.toast);
   const { lang, setLang } = useContext<any>(LangContext);
@@ -49,7 +49,7 @@ const UploadDocument = () => {
       }),
     ProxyType: Yup.string()
       .when("Proxy", (Proxy) => {
-        if (Proxy === "Y" && companyInfo?.meeting_type === "Condo") {
+        if (Proxy === "Y" && companyInfo?.meeting_type === "Investor") {
           return Yup.string().required("Proxy Type required")
         } else {
           return Yup.string()
@@ -57,7 +57,7 @@ const UploadDocument = () => {
       }),
     proxy_I_ref: Yup.string()
       .when("Proxy", (Proxy) => {
-        if (Proxy === "Y" && companyInfo?.meeting_type === "Investor") {
+        if (Proxy === "Y" && companyInfo?.meeting_type === "Condo") {
           return Yup.string().required("Proxy Id required")
         } else {
           return Yup.string()
@@ -101,15 +101,18 @@ const UploadDocument = () => {
     }
     return () => { }
   }, [formik?.values?.Proxy])
+
   useEffect(() => {
-    getUploadedDoc();
+    getEgm();
     return () => { }
   }, [])
   useEffect(() => {
     if (toast?.message === "Update successfully") {
-      getUploadedDoc();
+      getEgm();
       let USER: any = JSON.parse(localStorage.getItem("focus:user") || "");
-      let newUser = { ...USER, ...values };
+      let val:any={...values};
+      val.doc_received = "Y";
+      let newUser = { ...USER, ...val };
       localStorage.setItem("focus:user", JSON.stringify(newUser));
     }
     return () => { }
@@ -130,24 +133,20 @@ const UploadDocument = () => {
   }, [])
 
   useEffect(() => {
-    if (document?.docs) {
-      setFiles(document?.docs);
+    if (egm && egm.length > 0) {
+      setEgm(egm[0]);
     }
     return () => { }
-  }, [document])
+  }, [egm])
 
-  const getUploadedDoc = async () => {
+  const getEgm = async () => {
     let USER: any = await JSON.parse(localStorage.getItem("focus:user") || "");
-    dispatch(uploadedFileListAction(USER?.i_holder));
+    dispatch(getEgmAction({Proxy_name:USER?.Proxy_name, m_phone: USER?.m_phone, limit: 1, page:1 }));
   }
 
   const handleFileUpload = (e: any, id: any) => {
     fileObj=[];
-    /* fileArray=[];
-    uArr=[]; */
-    /* setFilesShow(fileObj);
-    setFileData(uArr); */
-    if(documentType?.length >= e.target.files.length){
+    if(e.target.files.length + fileArray.length <= 10){
       fileObj.push(e.target.files)
       for (let i = 0; i < fileObj[0].length; i++) {
         const reader: any = new FileReader();
@@ -159,14 +158,16 @@ const UploadDocument = () => {
       setFileData([...uArr]);
       setFilesShow([...fileArray]);
     } else {
-      alert(`you can upload only  ${documentType?.length} files`);
+      alert(`you can upload only  10 files`);
     }
   }
   function deleteFile(e: any) {
+    fileArray = fileArray.filter((item: any, index: any) => index !== e);
+    uArr = uArr.filter((item: any, index: any) => index !== e);
     const fs: any[] = fileArray.filter((item: any, index: any) => index !== e);
     const fd: any[] = uArr.filter((item: any, index: any) => index !== e);
-    setFileData(fs);
-    setFilesShow(fd);
+    setFileData([...fd]);
+    setFilesShow([...fs]);
   }
 
   return (
@@ -182,12 +183,12 @@ const UploadDocument = () => {
           {lang == "en" && <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Eng.pdf" target="_blank">English Manual</a>}
           {lang == "thai" && <a href="https://quidlab.com/img/eagm/CondoDocument_Upload_Thai.pdf" target="_blank">คู่มือภาษาไทย</a>}
         </div>
-        {USER && USER?.doc_received === "Y" &&
+        {USER && USER?.doc_received === "Y" && Egm?.ApprovedForOnline === "N" &&
           <div className='title' style={{ color: "red" }}>
             <p>{t('register.doc_under_considertion')}</p>
           </div>
         }
-        {files && files?.length > 0 &&
+        {Egm?.ApprovedForOnline && Egm?.ApprovedForOnline === "Y" &&
           <div className='title'>
             <p>{t('register.already_submit')}</p>
           </div>
@@ -253,7 +254,7 @@ const UploadDocument = () => {
                     <span className="error_message">{formik.errors.Proxy_name}</span>
                   ) : null}
                 </div>
-                {companyInfo?.meeting_type === "Condo" &&
+                {companyInfo?.meeting_type === "Investor" &&
                   <div className="form_group">
                     <label>{t('register.Proxy_Type')}</label>
                     <select className="form_control"
@@ -270,7 +271,7 @@ const UploadDocument = () => {
                       <span className="error_message">{formik.errors.ProxyType}</span>
                     ) : null}
                   </div>}
-                {companyInfo?.meeting_type === "Investor" &&
+                {companyInfo?.meeting_type === "Condo" &&
                   <div className="form_group">
                     <label>{t('register.Proxy_ID_Card')}</label>
                     <input type="text" className="form_control" placeholder="Proxy ID Card No" name="proxy_I_ref"
@@ -287,7 +288,13 @@ const UploadDocument = () => {
             <div className="form_group">
               <label>{t('register.upload_file')}</label>
               <div className="custom-file-upload">
-                <span>Choose files to upload</span>
+                <span>
+                <div className="form_group file-list">
+                {documentType?.length > 0 && documentType?.map((file: any, i: any) => (
+                  <div key={i} >{lang === "thai" ? file?.name_thai : file?.name_eng}</div>
+                ))}
+              </div>
+                </span>
                 <label className="uploadBtn">
                   <input type="file" style={{ display: "none" }} onChange={(e: any) => handleFileUpload(e, "1")} multiple />
                   Browse files
@@ -296,7 +303,7 @@ const UploadDocument = () => {
             </div>
             <div className='form_group fileuploader-items'>
               <ul className='fileuploader-items-list'>
-                {filesShow?.length > 0 && filesShow?.map((file: any, i: any) => (
+                {fileArray?.length > 0 && fileArray?.map((file: any, i: any) => {console.log(i); return (
                   <li className='list' key={i}>
                     <div className='columns'>
                       <div className='column-thumbnail'>
@@ -313,14 +320,9 @@ const UploadDocument = () => {
                       </div>
                     </div>
                   </li>
-                ))}
+                )})}
               </ul>
             </div>
-            {/* <div className="form_group file-list">
-              {files?.length > 0 && files?.map((file: any, i: any) => (
-                <div key={i} >{file?.document_path}</div>
-              ))}
-            </div> */}
           </div>
           <div className="sub_button">
             <button type="submit">Submit</button>

@@ -16,8 +16,8 @@ export const documentTypeListAction = createAction("documentType/list", (Request
 export const documentUploadAction = createAction("document/Upload", (Request: any) => ({
     payload: {Request },
 }));
-export const uploadedFileListAction = createAction("uploadedFileList", (id:any) => ({
-    payload: {id },
+export const getEgmAction = createAction("getEgm", (Request:any) => ({
+    payload: {Request },
 }));
 export const updateUserAction = createAction("updateUser", (Request: UpdateUserRequest,id:any) => ({
     payload: {Request,id },
