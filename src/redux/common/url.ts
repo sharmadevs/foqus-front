@@ -8,5 +8,5 @@ export const Url = {
     companyinfo: "/company",
     documentTypeList:"/document/list",
     documentUpload: "/document/upload",
-    uploadedFileList:"/document/uploaded/",
+    getEgm:"/egm",
 }

@@ -6,7 +6,7 @@ type UserState = {
     token:any;
     companyInfo: any;
     documentType:any[];
-    documentList: any[];
+    egm: any[];
 };
 
 let initialState: UserState = {
@@ -15,7 +15,7 @@ let initialState: UserState = {
     token:"",
     companyInfo:{},
     documentType: [],
-    documentList:[],
+    egm:[],
 };
 
 const userSlice = createSlice({
@@ -38,8 +38,8 @@ const userSlice = createSlice({
         },
         documentUploadResponse(state, action: PayloadAction<any>) {
         },
-        uploadedFileListResponse(state, action: PayloadAction<any>) {
-            state.documentList = action.payload;
+        egmListResponse(state, action: PayloadAction<any>) {
+            state.egm = action.payload;
         },
         updateUserResponse(state, action: PayloadAction<any>) {
             state.user = action.payload;
@@ -53,7 +53,7 @@ export const {
     companyInfoResponse,
     documentTypeListResponse,
     documentUploadResponse,
-    uploadedFileListResponse,
+    egmListResponse,
     updateUserResponse
 } = userSlice.actions;
 

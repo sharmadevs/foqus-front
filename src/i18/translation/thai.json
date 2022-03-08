@@ -11,6 +11,7 @@
         "privacy_text": "Quidtab Information Security Management and Data Protection Policy",
         "version_text": "Fogus version 2.3.0 Served from Singapore",
         "close_text": "Document registration is closed.",
+        "not_start_text": "Document registration not started.",
         "inp_unit_head": "บ้านเลขที่",
         "inp_unit_holder": "Unit No.",
         "inp_area_head": "ขนาดพื้นที่ตามโฉนด (ตางรางเมตร/ตารางวา) หรือ อัตราส่วนกรรมสิทธิ์",
