@@ -13,13 +13,16 @@ const ProxyLogin = (props:any) => {
     i_holder: Yup.string()
       .required('Unit No. No required'),
     I_ref: Yup.string()
-      .required('Area required')
+      .required('Area required'),
+    termsAccepted: Yup
+    .boolean()
+    .oneOf([true], 'Must Accept termsAccepted'),
   })
   const formik = useFormik({
     initialValues: {
       i_holder: '',
       I_ref: '',
-      termsAccepted:true
+      termsAccepted:false
     },
     validationSchema: loginSchema,
     onSubmit: values => {
@@ -29,7 +32,7 @@ const ProxyLogin = (props:any) => {
   return (
     <section className='section'>
       <div className='container'>
-       <Logo/>
+       {/* <Logo/> */}
         <div className='title'>
           <h2>{t('register.main_heading')}</h2>
           <h3>{lang === "thai" ? companyInfo?.Company_Name_Thai: companyInfo?.Company_Name_Eng}</h3>
@@ -69,6 +72,15 @@ const ProxyLogin = (props:any) => {
               ) : null}
               </div>
             </div>
+            <div className="sub_button">
+            <input type="checkbox" id="termsAccepted" name="termsAccepted" 
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            /><label htmlFor="termsAccepted">Accept terms</label>
+            {formik.errors.termsAccepted && formik.touched.termsAccepted ? (
+                <span className="error_message">{formik.errors.termsAccepted}</span>
+              ) : null}
+          </div>
             <div className="sub_button">
             <button type="submit" name="terms" >Submit</button>
             </div>

@@ -22,3 +22,9 @@ export const getEgmAction = createAction("getEgm", (Request:any) => ({
 export const updateUserAction = createAction("updateUser", (Request: UpdateUserRequest,id:any) => ({
     payload: {Request,id },
 }));
+export const getReasonFormAction = createAction("reason-form", (Request:any) => ({
+    payload: {Request },
+}));
+export const getProfileAction = createAction("getProfileAction", (Request:any) => ({
+    payload: {Request },
+}));

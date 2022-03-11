@@ -32,4 +32,10 @@ export class UserService {
     public updateUserList = async (data: UpdateUserRequest, id:any): Promise<HttpResponse<any>> => {
         return await Api.put(Url.updateUser + id, data);
     };
+    public getReasonForm = async (Request:any): Promise<HttpResponse<any>> => {
+        return await Api.get(Url.getReasonForm, Request);
+    };
+    public getProfile = async (): Promise<HttpResponse<any>> => {
+        return await Api.get(Url.getProfile);
+    };
 }

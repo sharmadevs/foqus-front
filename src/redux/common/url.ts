@@ -9,4 +9,6 @@ export const Url = {
     documentTypeList:"/document/list",
     documentUpload: "/document/upload",
     getEgm:"/egm",
+    getReasonForm: "/reason-form",
+    getProfile: "/egm/profile"
 }

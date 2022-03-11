@@ -7,6 +7,8 @@ type UserState = {
     companyInfo: any;
     documentType:any[];
     egm: any[];
+    reasonForm: any[];
+    profile:any;
 };
 
 let initialState: UserState = {
@@ -16,6 +18,8 @@ let initialState: UserState = {
     companyInfo:{},
     documentType: [],
     egm:[],
+    reasonForm: [],
+    profile:{}
 };
 
 const userSlice = createSlice({
@@ -44,6 +48,12 @@ const userSlice = createSlice({
         updateUserResponse(state, action: PayloadAction<any>) {
             state.user = action.payload;
         }, 
+        reasonFormResponse(state, action: PayloadAction<any>) {
+            state.reasonForm = action.payload;
+        },
+        getProfileResponse(state, action: PayloadAction<any>) {
+            state.profile = action.payload;
+        },
     },
 });
 
@@ -54,7 +64,9 @@ export const {
     documentTypeListResponse,
     documentUploadResponse,
     egmListResponse,
-    updateUserResponse
+    updateUserResponse,
+    reasonFormResponse,
+    getProfileResponse
 } = userSlice.actions;
 
 export default userSlice.reducer;
