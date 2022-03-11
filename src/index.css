@@ -134,8 +134,9 @@ body {
 .flex-row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   column-gap: 30px;
+  align-items: end;
 }
 .form_control:focus {
   border-color: #18c0ff;
@@ -157,21 +158,20 @@ body {
     vertical-align: middle;
     cursor: pointer;
 }
-.custom-file-upload {
+.doc_req {
   display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-    padding: 16px;
-    margin: 16px 0;
-    background: #fafbfd;
-    border-radius: 6px;
+  align-items: center;
+  padding-left:0px;
+  margin-left: 0px;
 }
-.custom-file-upload span {
+.custom-file-upload span, .doc_req span {
   color:  var(--lightblue);
   font-weight: 600;
-  width: 40%;
+}
+.custom-file-upload {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
 }
 .uploadBtn {
   padding: 10px 16px;
@@ -181,10 +181,14 @@ body {
   border:none;
   box-shadow: 0 4px 18px rgb(0 0 0 / 4%);
   cursor: pointer;
+  margin-left: 50px !important;
 }
-.file-list {
-  padding-left:30px;
-  text-align: left;
+.file-type {
+  padding-left:0px;
+  margin-left: 0px;
+}
+.fileType li{
+padding: 8px 0px;
 }
 .menual {
   display: flex;
@@ -213,7 +217,7 @@ body {
 }
 .lngdrp {
   justify-self: flex-end;
-  width: 280px;
+  /* width: 280px; */
 }
 .fileuploader-items{
   display: block;

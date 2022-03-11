@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import { useTranslation , withTranslation, WithTranslation} from 'react-i18next'
+import Logo from '../../component/Logo/Logo';
 import LangContext from '../../const/langContext';
 import i18n from "./../../i18/i18";
 const Header = () => {
@@ -12,7 +13,7 @@ const Header = () => {
   return (
     <div className='header'>
         <div></div>
-        <div></div>
+        <div><Logo /></div>
         <div className='lngdrp'>
             <div className="form_group">
                 <select className="form_control" onChange={(e:any)=>langChange(e)} value={lang||""}>

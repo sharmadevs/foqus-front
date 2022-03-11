@@ -35,7 +35,7 @@ const ShareHolderLogin = (props:any) => {
   return (
     <section className='section'>
       <div className='container'>
-        <Logo/>
+        {/* <Logo/> */}
         <div className='title'>
           <h2>{t('register.main_heading')}</h2>
           <h3>{lang === "thai" ? companyInfo?.Company_Name_Thai: companyInfo?.Company_Name_Eng}</h3>

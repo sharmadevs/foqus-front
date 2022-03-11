@@ -2,8 +2,8 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import ROUTE from "../../route/Route";
 import { loader, toast } from "../common/common-reducer";
 import { HttpResponse } from "../common/response-model";
-import {shareHolderLogInAction, logoutAction, companyInfoAction, documentTypeListAction, updateUserAction, documentUploadAction, getEgmAction } from "./action";
-import { companyInfoResponse, documentTypeListResponse, documentUploadResponse, egmListResponse, loginResponse, logoutResponse, updateUserResponse } from "./reducer";
+import {shareHolderLogInAction, logoutAction, companyInfoAction, documentTypeListAction, updateUserAction, documentUploadAction, getEgmAction, getReasonFormAction, getProfileAction } from "./action";
+import { companyInfoResponse, documentTypeListResponse, documentUploadResponse, egmListResponse, loginResponse, logoutResponse, updateUserResponse, reasonFormResponse ,getProfileResponse} from "./reducer";
 import { UserService } from "./service";
 
 export function* shareHolderLogin(data: any) {
@@ -99,6 +99,21 @@ export function* getEgm(data: any) {
         yield put(toast({ message: err.message, type: 'error' }));
     }
 }
+export function* getReasonForm(data: any) {
+    try {
+        yield put(loader(true));
+        let payload = data.payload;
+        let {Request} = payload;
+        let res: HttpResponse<any> = yield call(UserService.getInstance().getReasonForm, Request);
+        let response: any = res;
+        yield put(reasonFormResponse(response?.data));
+        yield put(loader(false));
+    } catch (err: any) {
+        yield put(loader(false));
+        yield put(toast({ message: err.message, type: 'error' }));
+    }
+}
+
 export function* updateUserList(data: any) {
     try {
         yield put(loader(true));
@@ -114,7 +129,18 @@ export function* updateUserList(data: any) {
         yield put(toast({ message: err.message, type: 'error' }));
     }
 }
-
+export function* getProfile(data: any) {
+    try {
+        yield put(loader(true));
+        let res: HttpResponse<any> = yield call(UserService.getInstance().getProfile);
+        let response: any = res;
+        yield put(getProfileResponse(response?.data));
+        yield put(loader(false));
+    } catch (err: any) {
+        yield put(loader(false));
+        yield put(toast({ message: err.message, type: 'error' }));
+    }
+}
 export function* userEffects() {
     yield takeLatest(shareHolderLogInAction.type, shareHolderLogin);
     yield takeLatest(logoutAction.type, logout);
@@ -123,6 +149,8 @@ export function* userEffects() {
     yield takeLatest(documentUploadAction.type, documentUpload);
     yield takeLatest(getEgmAction.type, getEgm);
     yield takeLatest(updateUserAction.type, updateUserList);
+    yield takeLatest(getReasonFormAction.type, getReasonForm);
+    yield takeLatest(getProfileAction.type, getProfile);
 }
 
 const userSagas = [call(userEffects)];
